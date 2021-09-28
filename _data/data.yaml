@@ -1,0 +1,191 @@
+budget:
+  years:
+    2020:
+      receipts:
+        total: 3419955005765
+        categorized:
+          "Individual Income Taxes": 1608661926485
+          "Social Security and Medicare Taxes": 1257204990680
+          "Corporate Income Taxes": 211844662324
+          "Miscellaneous Revenue": 116537527368
+          "Excise Taxes": 86782067346
+          "Customs Duties": 68550229846
+          "Unemployment Insurance": 43103787706
+          "Estate and Gift Taxes": 17624156022
+          "Other Retirement": 9645657989
+      spending:
+        total: 6551872254654
+        categorized:
+          "Income Security": 1262558242934
+          "Social Security": 1095817057878
+          "Medicare": 776224012763
+          "Health": 748292683864
+          "National Defense": 726151468010
+          "Commerce and Housing Credit": 607732706784
+          "Interest on Debt": 344704683969
+          "Education, Training, Employment, and Social Services": 236722686775
+          "Veterans Benefits and Services": 218673996985
+          "General Government": 176824813727
+          "Transportation": 146156220374
+          "Community and Regional Development": 83619153718
+          "Administration of Justice": 72102351855
+          "International Affairs": 67660337597
+          "Agriculture": 49152682967
+          "Natural Resources and Environment": 40690620068
+          "General Science, Space, and Technology": 34058562158
+          "Energy": 7167805888
+      gdp: 20996600000000
+  sources:
+    - "https://datalab.usaspending.gov/americas-finance-guide/"
+incomeTaxes:
+  years:
+    2018:
+      incomes:
+        - 1
+        - 5000
+        - 10000
+        - 15000
+        - 20000
+        - 25000
+        - 30000
+        - 40000
+        - 50000
+        - 75000
+        - 100000
+        - 200000
+        - 500000
+        - 1000000
+        - 1500000
+        - 2000000
+        - 5000000
+        - 10000000
+      numbers:
+        - 9187650
+        - 10014109
+        - 11454274
+        - 10187149
+        - 9610628
+        - 8984412
+        - 15510580
+        - 12017312
+        - 21460676
+        - 13685409
+        - 21146537
+        - 6905670
+        - 1108430
+        - 241713
+        - 98583
+        - 142011
+        - 34788
+        - 22112
+      totalTaxPaid:
+        - 18253000
+        - 42202000
+        - 391728000
+        - 2446560000
+        - 5100952000
+        - 7346616000
+        - 21772498000
+        - 27712569000
+        - 89654102000
+        - 97172107000
+        - 320536619000
+        - 327805680000
+        - 173214875000
+        - 75621335000
+        - 45715931000
+        - 115810423000
+        - 65049446000
+        - 163198922000
+  sources:
+    - "https://www.irs.gov/statistics/soi-tax-stats-individual-statistical-tables-by-size-of-adjusted-gross-income"
+incomes:
+  years:
+    2020:
+      incomes:
+        - 5000
+        - 10000
+        - 15000
+        - 20000
+        - 25000
+        - 30000
+        - 35000
+        - 40000
+        - 45000
+        - 50000
+        - 55000
+        - 60000
+        - 65000
+        - 70000
+        - 75000
+        - 80000
+        - 85000
+        - 90000
+        - 95000
+        - 100000
+        - 105000
+        - 110000
+        - 115000
+        - 120000
+        - 125000
+        - 130000
+        - 135000
+        - 140000
+        - 145000
+        - 150000
+        - 155000
+        - 160000
+        - 165000
+        - 170000
+        - 175000
+        - 180000
+        - 185000
+        - 190000
+        - 195000
+        - 200000
+        - 250000
+      numbers:
+        - 4211
+        - 2926
+        - 5109
+        - 5667
+        - 5609
+        - 5186
+        - 5329
+        - 5285
+        - 5100
+        - 4684
+        - 5063
+        - 4301
+        - 4264
+        - 3818
+        - 3971
+        - 3681
+        - 3490
+        - 2873
+        - 3086
+        - 2677
+        - 3122
+        - 2394
+        - 2469
+        - 1851
+        - 2141
+        - 1771
+        - 1690
+        - 1628
+        - 1479
+        - 1371
+        - 1576
+        - 1219
+        - 1251
+        - 995
+        - 1109
+        - 978
+        - 940
+        - 755
+        - 848
+        - 695
+        - 5134
+        - 8185
+  sources:
+    - "https://www.census.gov/data/tables/time-series/demo/income-poverty/cps-hinc/hinc-06.2020.html"
