@@ -51,9 +51,11 @@ const links = [
 // markup
 const IndexPage = () => {
   return (
-    <Layout>
+    <Layout
+      description="From the People helps convey the practical costs of government spending on an easily-accessible website."
+    >
       <main>
-        <title>Home Page</title>
+        <h2>Home Page</h2>
         <p>
           Edit <code>src/pages/index.js</code> to see this page
           update in real-time.{" "}

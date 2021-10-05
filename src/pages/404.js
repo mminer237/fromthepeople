@@ -5,10 +5,9 @@ import Layout from "../components/layout"
 // markup
 const NotFoundPage = () => {
   return (
-    <Layout>
+    <Layout title="404">
       <main>
-        <title>Not found</title>
-        <h1>Page not found</h1>
+        <h2>Page not found</h2>
         <p>
           Sorry{" "}
           <span role="img" aria-label="Pensive emoji">
