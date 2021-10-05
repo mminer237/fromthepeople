@@ -1,3 +1,6 @@
+$red: #BF0A30;
+$blue: hsl(217, 90%, 30%);
+$dark-blue: hsl(217, 90%, 15%);
 :root {
 	--background-color: white;
 }
@@ -9,17 +12,36 @@ body {
 	background-color: var(--background-color);
 	display: flex;
 	flex-direction: column;
+	font-family: sans-serif;
 	line-height: 1.2;
 	margin: 0;
 	min-height: 100vh;
 }
 header {
 	text-align: center;
-	padding: 25px;
+	padding: 15px;
+	h1 {
+		display: inline-block;
+		font-size: 56px;
+		-webkit-text-stroke-width: 1px;
+		-webkit-text-stroke-color: black;
+	}
+	.from {
+		color: $red;
+	}
+	.the {
+		color: white;
+	}
+	.people {
+		color: $blue;
+	}
 }
 @media (prefers-color-scheme: dark) {
 	:root {
 		--background-color: #222;
 		color: white;
+	}
+	header {
+		background-color: $dark-blue;
 	}
 }
