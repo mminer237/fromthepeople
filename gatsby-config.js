@@ -4,6 +4,7 @@ module.exports = {
     title: "From the People",
   },
   plugins: [
+    "gatsby-plugin-netlify",
     "gatsby-plugin-sass",
     {
       resolve: "gatsby-plugin-google-analytics",
