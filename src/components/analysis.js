@@ -5,8 +5,8 @@ import "charts.css"
 function makeCell(value, max) {
 	return (
 		<td style={{ "--size": `calc(${Math.round(value)} / ${max})` }}>
-			<span class="data">${Math.round(value).toLocaleString()}</span>
-			<span class="tooltip">${Math.round(value).toLocaleString()}</span>
+			<span className="data">${Math.round(value).toLocaleString()}</span>
+			<span className="tooltip">${Math.round(value).toLocaleString()}</span>
 		</td>
 	)
 }
@@ -21,17 +21,19 @@ export default function Analysis({ increase, targetYear = new Date().getFullYear
 	const maxTax = Math.round(Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid[Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid.length - 1] / Data.incomeTaxes.years[incomeTaxYear].numbers[Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid.length - 1] * (1 + percentIncrease));
 
 	return (
-		<div class="analysis">
-			<table class="charts-css bar hide-data show-labels show-primary-axis multiple stacked">
-				{Data.incomeTaxes.years[incomeTaxYear].incomes.map((income, i, a) => { return (
-					<tr>
-						<th scope="row">
-							{(income == 1) ? "$0" : `$${a[i - 1]}–$${income}`}
-						</th>
-						{makeCell(Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid[i] / Data.incomeTaxes.years[incomeTaxYear].numbers[i], maxTax)}
-						{makeCell(Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid[i] / Data.incomeTaxes.years[incomeTaxYear].numbers[i] * percentIncrease, maxTax)}
-					</tr>
-				)})}
+		<div className="analysis">
+			<table className="charts-css bar hide-data show-labels show-primary-axis multiple stacked">
+				<tbody>
+					{Data.incomeTaxes.years[incomeTaxYear].incomes.map((income, i, a) => { return (
+						<tr key={i}>
+							<th scope="row">
+								{(income == 1) ? "$0" : `$${a[i - 1]}–$${income}`}
+							</th>
+							{makeCell(Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid[i] / Data.incomeTaxes.years[incomeTaxYear].numbers[i], maxTax)}
+							{makeCell(Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid[i] / Data.incomeTaxes.years[incomeTaxYear].numbers[i] * percentIncrease, maxTax)}
+						</tr>
+					)})}
+				</tbody>
 			</table>
 		</div>
 	)

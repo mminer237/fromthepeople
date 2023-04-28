@@ -1,10 +1,10 @@
 import React from "react"
 import Analysis from "../components/analysis"
 
-export default function CustomAnalysis({ }) {
-	const [amount, setAmount] = React.useState(1000000000);
+export default function CustomAnalysis({ defaultIncrease = 1000000000 }) {
+	const [amount, setAmount] = React.useState(defaultIncrease);
 	
-	return <div class="split">
+	return <div className="split">
 		<Analysis increase={amount} />
 		<div>
 			<h3>Custom Analysis</h3>

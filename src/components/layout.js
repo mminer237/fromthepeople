@@ -19,7 +19,7 @@ export default function Layout({ children, description, title }) {
 			</Helmet>
 			<header>
 				<Link to="/">
-					<h1><span class="from">From</span> <span class="the">the</span> <span class="people">People</span></h1>
+					<h1><span className="from">From</span> <span className="the">the</span> <span className="people">People</span></h1>
 				</Link>
 			</header>
 			{children}
