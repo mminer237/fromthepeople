@@ -9,12 +9,14 @@ $dark-blue: hsl(217, 90%, 15%);
 	position: relative;
 }
 body {
+	margin: 0;
+}
+#gatsby-focus-wrapper {
 	background-color: var(--background-color);
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
 	font-family: sans-serif;
 	line-height: 1.2;
-	margin: 0;
 	min-height: 100vh;
 }
 header {
@@ -34,6 +36,33 @@ header {
 	}
 	.people {
 		color: $blue;
+	}
+}
+.no-break {
+	display: inline-block;
+	white-space: nowrap;
+}
+.split {
+	display: flex;
+	flex-wrap: wrap;
+	.analysis {
+		flex: 2 0 66%;
+	}
+	.analysis + * {
+		flex: 1 1 max(300px, 33%);
+	}
+}
+main {
+	grid-row: 2;
+}
+footer {
+	background-color: $blue;
+	color: white;
+	grid-row: 3;
+	padding: 15px;
+	text-align: center;
+	a {
+		color: white;
 	}
 }
 @media (prefers-color-scheme: dark) {
