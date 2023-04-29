@@ -38,6 +38,10 @@ header {
 		color: $blue;
 	}
 }
+main {
+	grid-row: 2;
+	margin-bottom: 18px;
+}
 .no-break {
 	display: inline-block;
 	white-space: nowrap;
@@ -52,8 +56,15 @@ header {
 		flex: 1 1 max(300px, 33%);
 	}
 }
-main {
-	grid-row: 2;
+.charts-css {
+	--color-1: #{$red};
+	--color-2: #{$blue};
+}
+.charts-css.bar:not(.reverse-datasets).stacked:not(.reverse) tbody tr {
+	min-height: 5ex;
+}
+.charts-css.bar.show-labels {
+	--labels-size: 105px;
 }
 footer {
 	background-color: $blue;

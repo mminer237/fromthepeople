@@ -4,7 +4,7 @@ import "charts.css"
 
 function makeCell(value, max) {
 	return (
-		<td style={{ "--size": `calc(${Math.round(value)} / ${max})` }}>
+		<td style={{ "--size": Math.log(value) / max }}>
 			<span className="data">${Math.round(value).toLocaleString()}</span>
 			<span className="tooltip">${Math.round(value).toLocaleString()}</span>
 		</td>
@@ -18,11 +18,12 @@ export default function Analysis({ increase, targetYear = new Date().getFullYear
 
 	const percentIncrease = (increase / Data.budget.years[budgetYear].spending.total);
 
-	const maxTax = Math.round(Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid[Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid.length - 1] / Data.incomeTaxes.years[incomeTaxYear].numbers[Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid.length - 1] * (1 + percentIncrease));
+	const maxPaid = Math.round(Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid[Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid.length - 1] / Data.incomeTaxes.years[incomeTaxYear].numbers[Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid.length - 1]);
+	const maxTax = Math.log(maxPaid) + Math.log(maxPaid * percentIncrease);
 
 	return (
 		<div className="analysis">
-			<table className="charts-css bar hide-data show-labels show-primary-axis multiple stacked">
+			<table className="charts-css bar hide-data show-labels show-primary-axis datasets-spacing-10 multiple stacked">
 				<tbody>
 					{Data.incomeTaxes.years[incomeTaxYear].incomes.map((income, i, a) => { return (
 						<tr key={i}>
