@@ -56,16 +56,6 @@ main {
 		flex: 1 1 max(300px, 33%);
 	}
 }
-.charts-css {
-	--color-1: #{$red};
-	--color-2: #{$blue};
-}
-.charts-css.bar:not(.reverse-datasets).stacked:not(.reverse) tbody tr {
-	min-height: 5ex;
-}
-.charts-css.bar.show-labels {
-	--labels-size: 105px;
-}
 footer {
 	background-color: $blue;
 	color: white;
