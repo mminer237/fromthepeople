@@ -3,15 +3,57 @@ import Data from "../data/data.yaml"
 import * as d3 from "d3"
 import { sankey, sankeyLinkHorizontal, sankeyCenter, SankeyLink } from "d3-sankey"
 
-export default function Analysis({ increase, targetYear = new Date().getFullYear() }) {
+export default function Analysis({ increase, income = 75_000, targetYear = new Date().getFullYear() }) {
 	/* Use year closest to the given year. */
-	const budgetYear = Object.keys(Data.budget.years).reduce((a, b) => Math.abs(b - targetYear) < Math.abs(a - targetYear) ? b : a);
-	const incomeTaxYear = Object.keys(Data.incomeTaxes.years).reduce((a, b) => Math.abs(b - targetYear) < Math.abs(a - targetYear) ? b : a);
+	const budgetYear =
+		Object.keys(Data.budget.years).reduce((a, b) =>
+			Math.abs(b - targetYear) < Math.abs(a - targetYear) ? b : a
+		);
+	const budget = Data.budget.years[budgetYear];
+	const incomeTaxYear =
+		Object.keys(Data.incomeTaxes.years).reduce((a, b) =>
+			Math.abs(b - targetYear) < Math.abs(a - targetYear) ? b : a
+		);
+	const incomeTaxes = Data.incomeTaxes.years[incomeTaxYear];
 
-	const percentIncrease = (increase / Data.budget.years[budgetYear].spending.total);
+	const percentIncrease = (increase / budget.spending.total);
 
-	const maxPaid = Math.round(Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid[Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid.length - 1] / Data.incomeTaxes.years[incomeTaxYear].numbers[Data.incomeTaxes.years[incomeTaxYear].totalTaxPaid.length - 1]);
-	const maxTax = Math.log(maxPaid) + Math.log(maxPaid * percentIncrease);
+	const restrictedFunds = [
+		"Social Security and Medicare Taxes",
+		"Unemployment Insurance",
+		"Other Retirement"
+	];
+	const generalReceipts =
+		Object.entries(budget.receipts.categorized).reduce((a, b) =>
+			["", a[1] + (restrictedFunds.includes(b[0]) ? 0 : b[1])], ["", 0]
+		)[1];
+	const incomeTaxPercentage = budget.receipts.categorized["Individual Income Taxes"] / generalReceipts;
+
+	let incomeTax = 0;
+	if (income < 1) {
+		incomeTax = 0;
+	}
+	else if (income >= incomeTaxes.incomes[incomeTaxes.incomes.length - 1].income) {
+		incomeTax = 190_000 + (income - 670_000) * 0.37 * 0.9;
+	}
+	else {
+		for (var incomeIndex = incomeTaxes.incomes.length - 2; incomeIndex >= 0; incomeIndex--) {
+			if (income >= incomeTaxes.incomes[incomeIndex].income) {
+				break;
+			}
+		}
+		const bracketMiddle = (incomeTaxes.incomes[incomeIndex] + incomeTaxes.incomes[incomeIndex + 1]) / 2;
+		const bracketRate = bracketMiddle / (incomeTaxes.totalTaxPaid[incomeIndex] / incomeTaxes.numbers[incomeIndex]);
+		const otherIndex = income < bracketMiddle ? incomeIndex - 1 : incomeIndex + 1;
+		const otherMiddle = otherIndex === incomeTaxes.incomes.length - 1 ?
+			22_000_000 :
+			(incomeTaxes.incomes[otherIndex].income + incomeTaxes.incomes[otherIndex + 1]) / 2;
+		const otherRate = otherMiddle / (incomeTaxes.totalTaxPaid[otherIndex] / incomeTaxes.numbers[otherIndex]);
+		const d1 = Math.abs(income - bracketMiddle);
+		const d2 = Math.abs(income - otherMiddle);
+		const rate = (d1 * otherRate + d2 * bracketRate) / (d1 + d2);
+		incomeTax = income * rate;
+	}
 
 	let data = {
 		"nodes": [
