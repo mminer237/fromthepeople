@@ -55,22 +55,84 @@ export default function Analysis({ increase, income = 75_000, targetYear = new D
 		incomeTax = income * rate;
 	}
 
+	function hashToColor(str) {
+		const array = str.split('');
+		let n = 0;
+		for (let i = 0; i < array.length; i++) {
+			n += array[i].charCodeAt(0) * (i + 1);
+		}
+		const hue = Math.abs(n) % 360;
+		return `hsl(${hue}deg, 80%, 35%)`;
+	}
+
+	// let data = {
+	// 	"nodes": [
+	// 		{"node": 0, "name": "foo", "color": "#ffaa11"},
+	// 		{"node": 1, "name": "bar", "color": "#ffaa55"},
+	// 		{"node": 2, "name": "baz", "color": "#ffaa99"}
+	// 	],
+	// 	"links": [
+	// 		{"source":0, "target":2, "value":2},
+	// 		{"source":1, "target":2, "value":2}
+	// 	]
+	// };
 	let data = {
 		"nodes": [
-			{"node": 0, "name": "foo", "color": "#ffaa11"},
-			{"node": 1, "name": "bar", "color": "#ffaa55"},
-			{"node": 2, "name": "baz", "color": "#ffaa99"}
+			{"node": 0, "name": "Total Spending", "color": hashToColor("Income Taxes")},
+			{"node": 1, "name": "Receipts", "color": hashToColor("Receipts")},
+			{"node": 2, "name": "Borrowing", "color": hashToColor("Borrowing")}
 		],
-		"links": [
-			{"source":0, "target":2, "value":2},
-			{"source":1, "target":2, "value":2}
-		]
+		"links": []
 	};
+
+	/* Add spending to chart */
+	let budgetTotal = 0;
+	for (const category in budget.spending.categorized) {
+		budgetTotal += budget.spending.categorized[category];
+		data.nodes.push({
+			"node": data.nodes.length,
+			"name": category,
+			"color": hashToColor(category)
+		});
+		data.links.push({
+			"source": data.nodes.length - 1,
+			"target": 0,
+			"value": budget.spending.categorized[category]
+		});
+	}
+
+	/* Add receipts to chart */
+	let allReceipts = 0;
+	for (const category in budget.receipts.categorized) {
+		allReceipts += budget.receipts.categorized[category];
+		data.nodes.push({
+			"node": data.nodes.length,
+			"name": category,
+			"color": hashToColor(category)
+		});
+		data.links.push({
+			"source": 1,
+			"target": data.nodes.length - 1,
+			"value": budget.receipts.categorized[category]
+		});
+	}
+	data.links.push({
+		"source": 0,
+		"target": 1,
+		"value": allReceipts
+	});
+	/* Add lack of receipts to chart */
+	data.links.push({
+		"source": 0,
+		"target": 2,
+		"value": budget.spending.total - allReceipts
+	});
+
 	const graph = sankey();
 	graph.nodeWidth(20);
-	graph.nodePadding(20);
+	graph.nodePadding(15);
 	// graph.extent([[15, 15], [500 - 15, 500 - 15]]);
-	graph.size([500, 500]);
+	graph.size([900, 600]);
 	const { nodes, links } = graph(data);
 	console.log(data);
 	console.log(graph);
